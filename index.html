@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TTT</title>
+    <link rel="icon" href="https://c8.alamy.com/comp/2RJFMFP/ttt-circle-letter-logo-design-with-circle-and-ellipse-shape-ttt-ellipse-letters-with-typographic-style-the-three-initials-form-a-circle-logo-ttt-ci-2RJFMFP.jpg">
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        body{
+            background: #548687;
+           text-align: center;
+        }
+        .container{
+    height: 70vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.game{
+    height: 70vmin;
+    width: 70vmin;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5vmin;
+}
+.box{
+    height: 18vmin;
+    width: 18vmin;
+    border-radius: 1rem;
+    border: none;
+    font-size: 8vmin;
+    color: #b0413e;
+    background-color: #ffffc7;
+}
+#btn{
+    padding: 1rem;
+    font-size: 1.25rem;
+    background-color: #191913;
+    color: #fff;
+    border-radius: 10px;
+    border: 0;
+}
+#new-game{
+    padding: 1rem;
+    font-size: 1.25rem;
+    background-color: #191913;
+    color: #fff;
+    border-radius: 10px;
+    border: 0;
+}
+#msg{
+    color: #ffffc7;
+    font-size: 5vmin;
+}
+.win{
+height: 15vmin;
+}
+.hide{
+    display: none;
+}
+    </style>
+</head>
+<body>
+    <div class="win hide">
+        <p id="msg">winner</p>
+  <button id="new-game">New Game</button>
+    </div>
+    <div class="main">
+<h1>Tic Tac Toe</h1>
+<div class="container">
+<div class="game">
+    <button class="box"></button>
+    <button class="box"></button>
+    <button class="box"></button>
+    <button class="box"></button>
+    <button class="box"></button>
+    <button class="box"></button>
+    <button class="box"></button>
+    <button class="box"></button>
+    <button class="box"></button>
+</div>
+</div>
+<button id="btn">Reset</button>
+    </div>
+</body>
+<script>
+let boxes = document.querySelectorAll(".box")
+let btn = document.querySelector("#btn")
+let newbtn = document.querySelector("#new-game")
+let win = document.querySelector(".win")
+let turnO=true;
+const winPatterns=[
+[0, 1, 2],
+  [0, 3, 6],
+  [0, 4, 8],
+  [1, 4, 7],
+  [2, 5, 8],
+  [2, 4, 6],
+  [3, 4, 5],
+  [6, 7, 8],
+];
+const Reset=()=>{
+    turnO=true
+    enableBoxes()
+    msg.classList.add("hide");
+}
+
+
+
+
+boxes.forEach((box)=>{
+    box.addEventListener("click",()=>{
+if (turnO) {
+    box.innerText="O"
+    turnO=false
+} else {
+    box.innerText="X"
+    turnO=true;
+}
+box.disabled=true;
+Checkwinner();
+
+    })
+})
+const disableBoxes=()=>{
+    for (const box of boxes) {
+        box.disabled=true
+    }
+}
+const enableBoxes=()=>{
+    for (const box of boxes) {
+        box.disabled=false
+        box.innerText=""
+    }
+}
+const showWinner=(winner)=>{
+msg.innerText=`Congratulations! Winner is ${winner}`
+win.classList.remove("hide")
+disableBoxes()
+}
+
+
+
+const Checkwinner=()=>{
+for (const pattern of winPatterns) {
+    let pos1 = boxes[pattern[0]].innerText
+    let pos2 = boxes[pattern[1]].innerText
+    let pos3 = boxes[pattern[2]].innerText
+if (pos1!="" && pos2 !="" && pos3!="") {
+    if (pos1===pos2 && pos2===pos3) {
+        showWinner(pos1);
+    }
+}
+
+
+}
+}
+btn.addEventListener("click",Reset)
+newbtn.addEventListener("click",Reset)
+</script>
+</html>
