@@ -70,7 +70,7 @@ height: 15vmin;
 <body>
     <div class="win hide">
         <p id="msg">winner</p>
-  <button id="new-game">New Game</button>
+  
     </div>
     <div class="main">
 <h1>Tic Tac Toe</h1>
@@ -93,7 +93,7 @@ height: 15vmin;
 <script>
 let boxes = document.querySelectorAll(".box")
 let btn = document.querySelector("#btn")
-let newbtn = document.querySelector("#new-game")
+
 let win = document.querySelector(".win")
 let turnO=true;
 const winPatterns=[
@@ -163,6 +163,6 @@ if (pos1!="" && pos2 !="" && pos3!="") {
 }
 }
 btn.addEventListener("click",Reset)
-newbtn.addEventListener("click",Reset)
+
 </script>
 </html>
